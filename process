@@ -1,0 +1,27 @@
+This is only for setup and connection cloud mongodb with MongoCompass
+
+Before start, please login to your server and follow this below steps for Ubuntu server. 
+
+1. sudo apt-get update
+2. sudo apt-get install mongodb-org
+3. sudo apt-get install mongodb-org
+4. sudo systemctl status mongodb
+5. sudo systemctl enable mongodb
+6. mongo
+7. db.createUser(
+{
+user: "rasel",
+pwd: "YourPassword",
+roles: [ { role: "root", db: "admin" } ]
+}
+)
+8. exit
+9. sudo vi /etc/mongodb.conf
+10. Changeauth = true && bindIp: 0.0.0.0 #default value is 127.0.0.1
+11. sudo systemctl restart mongodb   && sudo service mongodb start
+12. sudo service mongodb restart
+13. sudo iptables -A INPUT -p tcp --destination-port 27017 -m state --state NEW,ESTABLISHED -j ACCEPT
+14. sudo iptables -A OUTPUT -p tcp --source-port 27017 -m state --state ESTABLISHED -j ACCEPT
+15. sudo service mongodb start
+16. Open MongoDB Compass in your PC/Laptop
+17. filltup -> host, port, username, password, databaseName
